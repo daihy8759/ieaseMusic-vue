@@ -1,0 +1,55 @@
+@import '~ionicons201/css/ionicons.css';
+@import '~vue-happy-scroll/docs/happy-scroll.css';
+
+body{
+    position: relative;
+    height: 100vh;
+    overflow-y: hidden;
+    color: #fff;
+    font-size: 13px;
+    margin: 0;
+    -webkit-app-region: drag;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.happy-scroll-container{
+    overflow-y: hidden;
+}
+
+a:link, a:visited, a:hover, a:active{
+    text-decoration: none;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 0 8px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-family: 'Roboto';
+    background: #000;
+    color: #fff;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-24px);
+    transition: .2s;
+}
+
+.tooltip:hover::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-36px);
+}
+
+.clearfix{
+    display: inline-block;
+}
