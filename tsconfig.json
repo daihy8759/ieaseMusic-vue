@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "linterOptions":{
+    "exclude": [
+          "**/utils/**"
+      ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
