@@ -31,10 +31,9 @@
     "qs": "^6.5.2",
     "random-useragent": "^0.3.1",
     "rgbaster": "^1.0.0",
-    "rxjs": "^6.2.1",
     "uuid": "^3.2.1",
     "vue": "^2.5.16",
-    "vue-happy-scroll": "^2.0.1",
+    "vue-happy-scroll": "^2.1.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

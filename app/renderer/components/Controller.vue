@@ -1,97 +1,82 @@
 <template>
-    <div>
-        <div class="container">
-            <div
-                class="bar"
-                id="progress"
-                @click="seek">
-                <div class="playing" :data-time="currentTime" :style="transform"/>
-                <div class="buffering" />
+  <div>
+    <div class="container">
+      <div class="bar" id="progress" @click="seek">
+        <div class="playing" :data-time="currentTime" :style="transform"/>
+        <div class="buffering"/>
+      </div>
+      <section>
+        <router-link to class="tooltip">
+          <ProgressImage :height="50" :width="50" :src="song.album.cover"/>
+        </router-link>
+        <aside>
+          <div class="info">
+            <p class="title">
+              <router-link to="test">{{song.name}}</router-link>
+            </p>
+            <p class="author">
+              <router-link
+                :to="artist.link"
+                v-for="(artist,index) in song.artists"
+                :key="artist.id"
+              >
+                <template v-if="index > 0">&nbsp;/&nbsp;</template>
+                {{artist.name}}
+              </router-link>
+            </p>
+          </div>
+          <div class="action">
+            <span class="highquality" title="High Quality Music">SQ</span>
+            <span class="text" @click="showLyrics">LRC</span>
+            <span class="text" @click="showComments">{{formatComments(comments)}} Comments</span>
+            <i class="ion-ios-heart"></i>
+            <i class="ion-ios-shuffle-strong"></i>
+            <div class="controls">
+              <i class="ion-ios-rewind"></i>
+              <span class="toggle">
+                <i class="ion-ios-pause" @click="togglePause" v-show="playing"></i>
+                <i class="ion-ios-play" @click="togglePlay" v-show="!playing"></i>
+              </span>
+              <i class="ion-ios-fastforward" style="margin-right:0px" @click="nextSong"></i>
             </div>
-            <section>
-                <router-link to="" class="tooltip">
-                    <ProgressImage :height="50" :width="50" :src="song.album.cover" />
-                </router-link>
-                <aside>
-                <div class="info">
-                    <p class="title">
-                        <router-link to="test">{{song.name}}</router-link>
-                    </p>
-                    <p class="author">
-                        <router-link :to="artist.link" v-for="(artist,index) in song.artists" :key="artist.id">
-                          <template v-if="index > 0">
-                            &nbsp;/&nbsp;
-                          </template>
-                          {{artist.name}}
-                        </router-link>
-                    </p>
-                </div>
-                <div class="action">
-                    <span
-                        class="highquality"
-                        title="High Quality Music">
-                        SQ
-                    </span>
-                    <span
-                        class="text"
-                        @click="showLyrics">
-                        LRC
-                    </span>
-                    <span
-                        class="text"
-                        @click="showComments">
-                        {{formatComments(comments)}} Comments
-                    </span>
-                    <i class="ion-ios-heart"></i>
-                    <i class="ion-ios-shuffle-strong"></i>
-                    <div class="controls">
-                        <i class="ion-ios-rewind"></i>
-                        <span class="toggle">
-                            <i class="ion-ios-pause" @click="togglePause" v-show="playing"></i>
-                            <i class="ion-ios-play" @click="togglePlay" v-show="!playing"></i>
-                        </span>
-                        <i class="ion-ios-fastforward" style="margin-right:0px" @click="nextSong"></i>
-                    </div>
-                </div>
-                </aside>
-            </section>
-        </div>
+          </div>
+        </aside>
+      </section>
     </div>
+  </div>
 </template>
 
 <script>
-import { mapState,mapGetters } from "vuex";
-import { ipcRenderer } from 'electron';
+import { mapState, mapGetters } from "vuex";
+import { ipcRenderer } from "electron";
 import ProgressImage from "./ProgressImage.vue";
 import helper from "../utils/helper";
-import { from } from 'rxjs';
+
 export default {
   components: {
     ProgressImage
   },
   data() {
     return {
-      comments: 36760
+      comments: 0
     };
   },
   computed: {
     ...mapState({
       song: state => state.controller.song,
-      playing: state => state.controller.playing,
+      playing: state => state.controller.playing
     }),
-    ...mapGetters('controller',{
-      currentTime: 'currentTime',
-      transform: 'transform'
+    ...mapGetters("controller", {
+      currentTime: "currentTime",
+      transform: "transform"
     })
   },
   methods: {
     seek() {},
     showLyrics() {
-      this.$store.dispatch("lyrics/show", true)
+      this.$store.dispatch("lyrics/show", true);
     },
-    showComments() {
-      
-    },
+    showComments() {},
     togglePause() {
       this.$store.dispatch("controller/toggle", false);
     },
@@ -106,9 +91,9 @@ export default {
     }
   },
   mounted() {
-    ipcRenderer.on('next', () => {
-      this.$store.dispatch('controller/next')
-    })
+    ipcRenderer.on("next", () => {
+      this.$store.dispatch("controller/next");
+    });
   }
 };
 </script>

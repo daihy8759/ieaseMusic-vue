@@ -1,3 +1,4 @@
+import like from "./like";
 import login from "./login";
 import lyric from "./lyric";
 import musicUrl from "./music_url";
@@ -14,4 +15,5 @@ export {
   musicUrl,
   lyric,
   login,
+  like,
 };

@@ -13,8 +13,8 @@
 <script>
 import { mapState } from "vuex";
 import helper from "../utils/helper";
-import { timer } from "rxjs";
 import controller from "../store/modules/controller";
+
 export default {
   computed: {
     ...mapState({
@@ -56,9 +56,9 @@ export default {
     timeupdate(e) {
       const duration = this.song.duration;
       const currentTime = e.target.currentTime;
-      timer(1000).subscribe(() => {
+      setTimeout(() => {
         this.$store.dispatch("controller/currentTime", currentTime);
-      });
+      }, 1000);
     }
   }
 };
