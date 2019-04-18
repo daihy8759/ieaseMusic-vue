@@ -1,5 +1,5 @@
 import bigInt from "big-integer";
-import crypto from "crypto";
+import CryptoJS from "crypto-js";
 
 const modulus = "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea" +
     "8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f" +
@@ -20,13 +20,13 @@ function createSecretKey(size: number) {
 }
 
 function aesEncrypt(text: string, secKey: string) {
-  const newText = text;
-  const lv = new Buffer("0102030405060708", "binary");
-  const newSecKey = new Buffer(secKey, "binary");
-  const cipher = crypto.createCipheriv("AES-128-CBC", newSecKey, lv);
-  let encrypted = cipher.update(newText, "utf8", "base64");
-  encrypted += cipher.final("base64");
-  return encrypted;
+  const newSecKey = CryptoJS.enc.Utf8.parse(secKey);
+  const iv =  CryptoJS.enc.Utf8.parse("0102030405060708");
+  return CryptoJS.AES.encrypt( text, newSecKey, {
+    iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  }).toString();
 }
 
 function zfill(str: string, size: number) {

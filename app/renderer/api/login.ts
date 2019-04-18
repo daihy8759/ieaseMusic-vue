@@ -1,13 +1,11 @@
-import crypto from "crypto";
+import MD5 from "crypto-js/md5";
 import { post } from "../utils/request";
 
 export default (phone, password) => {
     const path = "/weapi/login/cellphone";
-    const md5sum = crypto.createHash("md5");
-    md5sum.update(password);
     const data = {
         phone,
-        password: md5sum.digest("hex"),
+        password: MD5(password).toString(),
         rememberLogin: "true",
     };
     return post(path, data);
