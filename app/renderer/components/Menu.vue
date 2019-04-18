@@ -1,78 +1,49 @@
 <template>
-    <div v-show="show">
-        <div class="container" ref="container" tabIndex="-1">
-            <div class="overlay" @click="close"/>
-                <section class="body">
-                    <img
-                        alt="Close Menus"
-                        class="close"
-                        @click="close"
-                        src="../assets/close.png" />
-                    <div>
-                        <div class="navs">
-                            <p v-if="hasLogin">
-                                <artist class="profile">
-                                    <router-link class="clearfix" :to="userLink">
-                                        <FadeImage :src="profile.avatarUrl" />
-                                    </router-link>
+  <div v-show="show">
+    <div class="container" ref="container" tabindex="-1">
+      <div class="overlay" @click="close"/>
+      <section class="body">
+        <img alt="Close Menus" class="close" @click="close" src="../assets/close.png">
+        <div>
+          <div class="navs">
+            <p v-if="hasLogin">
+              <artist class="profile">
+                <router-link class="clearfix" :to="userLink">
+                  <FadeImage :src="profile.avatarUrl"/>
+                </router-link>
 
-                                    <div class="info">
-                                        <p
-                                            class="username"
-                                            @click="close"
-                                            :title="profile.nickname">
-                                            <router-link :to="userLink">{{profile.nickname}}</router-link>
-                                        </p>
-                                        <a
-                                            class="logout"
-                                            href=""
-                                            @click="doLogout">
-                                            Logout
-                                        </a>
-                                    </div>
-                                </artist>
-                            </p>
-                            <p v-else>
-                                <a @click="goLogin">
-                                    Sign in
-                                </a>
-                            </p>
-                            <p>
-                                <router-link @click="close" to="/">
-                                    Home
-                                </router-link>
-                            </p>
-                            <p>
-                                <router-link @click="showSearch" to="search">
-                                    Search
-                                </router-link>
-                            </p>
-                            <p>
-                                <router-link @click="close"
-                                    to="/playlist/全部">
-                                    Playlist
-                                </router-link>
-                            </p>
-                            <p>
-                                <router-link
-                                    @click="close"
-                                    to="/top">
-                                    Top
-                                </router-link>
-                            </p>
+                <div class="info">
+                  <p class="username" @click="close" :title="profile.nickname">
+                    <router-link :to="userLink">{{profile.nickname}}</router-link>
+                  </p>
+                  <a class="logout" href @click="doLogout">Logout</a>
+                </div>
+              </artist>
+            </p>
+            <p v-else>
+              <a @click="goLogin">Sign in</a>
+            </p>
+            <p>
+              <router-link @click="close" to="/">Home</router-link>
+            </p>
+            <p>
+              <router-link @click="showSearch" to="search">Search</router-link>
+            </p>
+            <p>
+              <router-link @click="close" to="/playlist/全部">Playlist</router-link>
+            </p>
+            <p>
+              <router-link @click="close" to="/top">Top</router-link>
+            </p>
 
-                            <p>
-                                <router-link
-                                    @click="close"
-                                    to="/fm">
-                                    My FM
-                                </router-link>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            <p>
+              <router-link @click="close" to="/fm">My FM</router-link>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
+  </div>
 </template>
 
 <script>

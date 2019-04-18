@@ -27,6 +27,8 @@ export default {
       if (newValue !== oldValue) {
         if (!newValue) {
           this.$refs.player.pause();
+        } else {
+          this.$refs.player.play();
         }
       }
     }
